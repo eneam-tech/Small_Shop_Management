@@ -1,4 +1,4 @@
-package it.eneaminelli.shopmanagement;
+package it.eneaminelli.shopmanagement.item;
 
 public enum ItemType {
     TEST_ITEM_1,

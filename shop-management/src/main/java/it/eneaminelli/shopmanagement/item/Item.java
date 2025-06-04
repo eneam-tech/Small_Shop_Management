@@ -1,4 +1,4 @@
-package it.eneaminelli.shopmanagement;
+package it.eneaminelli.shopmanagement.item;
 
 public class Item implements ItemInterface {
     private String name;

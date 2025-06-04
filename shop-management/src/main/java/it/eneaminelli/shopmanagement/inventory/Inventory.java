@@ -1,7 +1,9 @@
-package it.eneaminelli.shopmanagement;
+package it.eneaminelli.shopmanagement.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.eneaminelli.shopmanagement.item.Item;
 
 public class Inventory {
     private List<Item> itemList;
@@ -61,4 +63,5 @@ public class Inventory {
         }
         return "Unknown error occurred. Please try again";
     }
+
 }

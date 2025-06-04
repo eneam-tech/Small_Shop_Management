@@ -1,4 +1,4 @@
-package it.eneaminelli.shopmanagement;
+package it.eneaminelli.shopmanagement.item;
 
 public class ItemFactory {
     public Item createItem(ItemType itemType, String name, double price, String productID, int stock){

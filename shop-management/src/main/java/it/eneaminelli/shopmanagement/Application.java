@@ -1,14 +1,13 @@
 package it.eneaminelli.shopmanagement;
 
+import it.eneaminelli.shopmanagement.inventory.InventoryManager;
+
 public class Application {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        // ItemFactory itemFactory = new ItemFactory();
-        // Item test = itemFactory.createItem(ItemType.TEST_ITEM_1, "Test 1", 99.99, "ABX", 9);
-        // System.out.println(test.toString());
         InventoryManager inventoryManager = new InventoryManager();
         inventoryManager.createItem();
-        System.out.println(inventoryManager.inventory.toString());
+        System.out.println(inventoryManager.getInventory().toString());
     }
 }
