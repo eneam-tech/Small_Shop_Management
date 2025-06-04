@@ -34,4 +34,8 @@ public class Item implements ItemInterface {
         this.stock = stock;
     }
 
+    public String getProductID() {
+        return productID;
+    }
+
 }
