@@ -64,4 +64,8 @@ public class Inventory {
         return "Unknown error occurred. Please try again";
     }
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
 }
