@@ -38,4 +38,8 @@ public class Item implements ItemInterface {
         return productID;
     }
 
+    public String prepareForSaving(){
+        return name + productID + itemType.toString(); 
+    }
+
 }

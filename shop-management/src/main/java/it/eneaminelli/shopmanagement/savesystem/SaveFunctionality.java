@@ -1,31 +1,54 @@
 package it.eneaminelli.shopmanagement.savesystem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import it.eneaminelli.shopmanagement.inventory.Inventory;
+import com.google.gson.Gson;
+
+import it.eneaminelli.shopmanagement.inventory.InventoryManager;
 import it.eneaminelli.shopmanagement.item.Item;
 
+
 public class SaveFunctionality {
-    private List<Map<String, String>> propertyMaps = new ArrayList<>();
+    
+    Gson gson = new Gson();
+    List<String> savedItems = new ArrayList<>();
 
-    private List<Map<String, String>> parseProperties(Inventory inventory){
-        List<Item> items = inventory.getItemList();
-        for(Item item : items){
-            Map<String, String> itemProperties = new HashMap<>();
-            itemProperties.put("name", item.getName());
-            itemProperties.put("productID", item.getProductID());
-            propertyMaps.add(itemProperties);
+    public void save(InventoryManager inventoryManager){
+        String jsonString;
+        /*
+        String jsonString = gson.toJson(inventoryManager.getFirstItem());
+
+        System.out.println("Save test:");
+        System.out.println("Object: " + jsonString);
+        System.out.println("Commencing serialization...");
+        System.out.println("Serialization result:");
+        System.out.println("JSON: " + jsonString);
+
+
+        System.out.println("--------------Deserialization:---------------");
+        Item testItem = gson.fromJson(jsonString, Item.class);
+        System.out.println("Deserialization result: ");
+        System.out.println(testItem.toString());
+
+         */
+
+        for (Item item : inventoryManager.getInventory().getItemList()) {
+            jsonString = gson.toJson(item);
+            System.out.println("Serialized item: " + jsonString);
+            savedItems.add(jsonString);
         }
-        return propertyMaps;
+
+        for(String string : savedItems){
+            Item testItem = gson.fromJson(string, Item.class);
+            System.out.println("Deserialized item: " + testItem.toString());
+        }
     }
 
-    //TODO: import Gson, finish save functionality
-    public void save(){
-        // Gson gson = new Gson();
-        // String json = gson.toJson(propertyMaps);
-        // Files.writeString(Path.of("inventory.json"), json); 
+    public void load(InventoryManager inventoryManager) {
+        for(String string : savedItems){
+            inventoryManager.createItem();
+        }
     }
+
 }

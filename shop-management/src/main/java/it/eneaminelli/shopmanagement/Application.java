@@ -1,6 +1,7 @@
 package it.eneaminelli.shopmanagement;
 
 import it.eneaminelli.shopmanagement.inventory.InventoryManager;
+import it.eneaminelli.shopmanagement.savesystem.SaveFunctionality;
 
 public class Application {
 
@@ -9,5 +10,7 @@ public class Application {
         InventoryManager inventoryManager = new InventoryManager();
         inventoryManager.createItem();
         System.out.println(inventoryManager.getInventory().toString());
+        SaveFunctionality saveFunctionality = new SaveFunctionality();
+        saveFunctionality.save(inventoryManager);
     }
 }
