@@ -32,7 +32,7 @@ public class InventoryManager {
     public Item getFirstItem(){
         List<Item> itemList = new ArrayList<>();
 
-        itemList = inventory.getItemList();
+        itemList = inventory.getAllItems();
         
         try {
             return itemList.get(0);

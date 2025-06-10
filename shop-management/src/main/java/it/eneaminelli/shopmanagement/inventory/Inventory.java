@@ -1,71 +1,73 @@
 package it.eneaminelli.shopmanagement.inventory;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import it.eneaminelli.shopmanagement.item.Item;
 
 public class Inventory {
-    private List<Item> itemList;
 
+    //TODO: convert from list (O(n) complexity) to map (o(1)) complexity
+    private final Map<String, Item> inventoryMap;
+
+    //Constructor for new sessions
     public Inventory(){
-        itemList = new ArrayList<Item>();
+        this.inventoryMap = new HashMap<>();
     }
 
-    public void addItem(Item item) {
-        System.out.println("Adding item to inventory: \n" + item.toString() + "\n...");
-        itemList.add(item);
-        System.out.println("Item added in position " + itemList.indexOf(item));
+    //Constructor for resuming session
+    public Inventory(Collection<Item> initialItems){
+        this.inventoryMap = initialItems.stream().collect(Collectors.toMap(Item -> Item.getProductID(), Function.identity(), (item1, item2) -> item2));
     }
 
-    //Using standard for loop to avoid concurrent modification exception - TODO: improve logic
-    public void removeItemWithCode(String productID){
-        for (int i = 0; i < itemList.size(); i ++) {
-            Item item = itemList.get(i);
-            if(item.getProductID() == null ? productID == null : item.getProductID().equals(productID)){
-                System.out.println("Removing item: " + item.toString() +  "\nFrom list...");
-                itemList.remove(i);
-                System.out.println("Item removed successfully!");
-            }
+    public void addItem(Item item){
+        if(item == null || item.getProductID() == null){
+            System.err.println("Cannot add a null item or item without an ID");
+            return;
+        } 
+
+        System.out.println("Adding/updating item with ID: " + item.getProductID());
+        inventoryMap.put(item.getProductID(), item);
+        System.out.println("Operation successful");
+    }
+
+    public Item getItem(String productID){
+        return inventoryMap.get(productID);
+    }
+
+    //TODO: implement commander pattern
+    public void removeItem(String productID){
+        Item removedItem = inventoryMap.remove(productID);
+        if(removedItem != null){
+            System.out.println("Succesfully removed item " + removedItem.getName());
+        } else {
+            System.out.println("No item found with ID: " + productID);
         }
     }
 
-    public void removeItem(Item item){
-        String productID = item.getProductID();
-        removeItemWithCode(productID);
+    //Return list for other methods
+    public List<Item> getAllItems(){
+        return new ArrayList<>(inventoryMap.values());
     }
+
 
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-
-        try {
-            if(itemList != null && !itemList.isEmpty()){
-                
-                for (int i = 0; i < itemList.size(); i ++) {
-                    sb.append("\n").append(i + 1).append(". ").append(itemList.get(i).toString());
-                }
-
-                System.out.println("Inventory:\n");
-                System.out.println(sb.toString());
-
-                return sb.toString();
-
-            } else if (itemList != null && itemList.isEmpty()){
-                return "Inventory is empty.";
-
-            } else {
-                return "Error in inventory. Inventory is currently null.";
-
-            }
-        } catch (IllegalArgumentException | NullPointerException e) {
-            System.err.println("Invalid Inventory. Exception occurred: " + e);
+        if(inventoryMap.isEmpty()){
+            return "inventory is empty.";
         }
-        return "Unknown error occurred. Please try again";
-    }
 
-    public List<Item> getItemList() {
-        return itemList;
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for(Item item : inventoryMap.values()){
+            sb.append(i++).append(". ").append(item.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
 }
