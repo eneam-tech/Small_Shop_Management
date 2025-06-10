@@ -44,11 +44,11 @@ public class SaveFunctionality {
             System.out.println("Deserialized item: " + testItem.toString());
         }
     }
-
+/*
     public void load(InventoryManager inventoryManager) {
         for(String string : savedItems){
             inventoryManager.createItem();
         }
     }
-
+ */
 }

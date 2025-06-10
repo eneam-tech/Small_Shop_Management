@@ -3,7 +3,7 @@ package it.eneaminelli.shopmanagement.strategies;
 import java.util.Scanner;
 
 import it.eneaminelli.shopmanagement.item.Item;
-
+//TODO: Add input sanitization!!!!!
 public class UserInputCreationStrategy implements ItemCreationStrategy {
     @Override
     public Item create(){

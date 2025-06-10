@@ -5,20 +5,28 @@ import java.util.List;
 
 import it.eneaminelli.shopmanagement.item.Item;
 import it.eneaminelli.shopmanagement.item.ItemFactory;
-import it.eneaminelli.shopmanagement.item.ItemType;
+import it.eneaminelli.shopmanagement.strategies.ItemCreationStrategy;
 
 public class InventoryManager {
     private ItemFactory itemFactory = new ItemFactory();
     private Inventory inventory = new Inventory();
 
-    public Inventory getInventory() {
-        return inventory;
+    //Entry point for creating an item - new objects must implement strategy interface!
+    public void createItem(ItemCreationStrategy strategy){
+        if(strategy == null){
+            System.err.println("Strategy cannot be null.");
+            return;
+        }
+
+        //Delegating construction logic to strategies
+
+        Item newItem = strategy.create();
+        System.out.println("Item created: " + newItem.toString());
+        inventory.addItem(newItem);
     }
 
-    public void createItem(){
-        Item test = itemFactory.createItem(ItemType.TEST_ITEM_1, "Test 1", 99.99, "ABX", 9);
-        System.out.println(test.toString());
-        inventory.addItem(test);
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public Item getFirstItem(){
