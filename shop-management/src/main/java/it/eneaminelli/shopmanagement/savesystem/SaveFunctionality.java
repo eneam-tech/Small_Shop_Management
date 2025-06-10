@@ -33,7 +33,7 @@ public class SaveFunctionality {
 
          */
 
-        for (Item item : inventoryManager.getInventory().getItemList()) {
+        for (Item item : inventoryManager.getInventory().getAllItems()) {
             jsonString = gson.toJson(item);
             System.out.println("Serialized item: " + jsonString);
             savedItems.add(jsonString);

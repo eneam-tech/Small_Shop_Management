@@ -1,8 +1,8 @@
 package it.eneaminelli.shopmanagement.item;
 
 public enum ItemType {
-    TEST_ITEM_1,
-    TEST_ITEM_2,
+    PERISHABLE,
+    ELECTRONIC,
     DEFAULT_ITEM;
 
     public static String getType(){
@@ -15,8 +15,8 @@ public enum ItemType {
 
     public String toString(){
         return switch (this) {
-            case TEST_ITEM_1 -> "test item 1";
-            case TEST_ITEM_2 -> "test item 2";
+            case PERISHABLE -> "Perishable";
+            case ELECTRONIC -> "Electronic";
             case DEFAULT_ITEM -> "default item";
             default -> "Error in type input.";
         };
