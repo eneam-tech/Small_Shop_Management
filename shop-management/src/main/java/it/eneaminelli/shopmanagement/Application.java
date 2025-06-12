@@ -1,26 +1,68 @@
 package it.eneaminelli.shopmanagement;
 
+import java.util.Scanner;
+
+import it.eneaminelli.shopmanagement.inventory.Inventory;
 import it.eneaminelli.shopmanagement.inventory.InventoryManager;
-import it.eneaminelli.shopmanagement.strategies.JsonCreationStrategy;
+import it.eneaminelli.shopmanagement.item.ItemFactory;
+import it.eneaminelli.shopmanagement.savesystem.PersistenceException;
+import it.eneaminelli.shopmanagement.savesystem.PersistenceService;
 import it.eneaminelli.shopmanagement.strategies.UserInputCreationStrategy;
 
 public class Application {
+    public static final String SAVE_FILE_PATH = "inventory.json";
 
     public static void main(String[] args) {
-        InventoryManager inventoryManager = new InventoryManager();
+        //--- Setup
+        PersistenceService persistenceService = new PersistenceService();
+        Inventory inventory;
 
-        //Test 1: create item from JSON string (-> loading from file)
-        System.out.println("---Creating item from JSON---");
-        String jsonFromFile = "{\"productID\":\"XYZ-123\", \"name\":\"Super Widget\", \"price\":19.95, \"stock\":100}";
-        inventoryManager.createItem(new JsonCreationStrategy(jsonFromFile));
+        //Try loading
+        try{
+            inventory = persistenceService.load(SAVE_FILE_PATH);
+        } catch (PersistenceException e) {
+            System.err.println("FATAL ERROR: could not load inventory.\nExiting with error: " + e);
+            return;
+        }
 
-        System.out.println("\n---------------------------------------\n");
+        InventoryManager manager = new InventoryManager(inventory, new ItemFactory());
+        Scanner scannerMenu = new Scanner(System.in);
 
-        //Test 2: create item from user input
-        System.out.println("---Creating item from user input---");
-        inventoryManager.createItem(new UserInputCreationStrategy());
+        while (true) { 
+            System.out.println("\n+++ SHOP MANAGEMENT SOFTWARE +++");
+            System.out.println("1. Add a new item");
+            System.out.println("2. Display inventory");
+            System.out.println("3. Save and Exit");
+            System.out.print("Choose an option: ");
 
-        System.out.println("\nInventory:");
-        System.out.println(inventoryManager.getInventory().toString());
+            String choice = scannerMenu.nextLine();
+
+            switch (choice) {
+                case "1":
+                    // Use the UserInputCreationStrategy to create an item
+                    System.out.println("--- Starting Item Creation ---");
+                    manager.createItem(new UserInputCreationStrategy());
+                    break;
+                case "2":
+                    // Display the current inventory state
+                    System.out.println("\n--- Current Inventory ---");
+                    System.out.println(inventory.toString());
+                    break;
+                case "3":
+                    // Save the inventory and exit the application
+                    try {
+                        System.out.println("Saving inventory...");
+                        persistenceService.save(inventory, SAVE_FILE_PATH);
+                        System.out.println("Save successful. Exiting.");
+                        return; // Exit the main method, thus ending the program
+                    } catch (PersistenceException e) {
+                        System.err.println("CRITICAL ERROR: Could not save inventory! " + e.getMessage());
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        }
     }
 }

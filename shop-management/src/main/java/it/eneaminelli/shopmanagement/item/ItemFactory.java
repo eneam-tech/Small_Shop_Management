@@ -4,6 +4,7 @@ package it.eneaminelli.shopmanagement.item;
 
 import java.time.LocalDate;
 
+import it.eneaminelli.shopmanagement.item.itemsubclasses.ElectronicItem;
 import it.eneaminelli.shopmanagement.item.itemsubclasses.PerishableItem;
 
 public class ItemFactory {
@@ -17,10 +18,12 @@ public class ItemFactory {
                 } else {
                     throw new IllegalArgumentException("PerishableItem requires a localdate expiry date.");
                 }
-            case ELECTRONIC: //TODO: add electronic item
+            case ELECTRONIC:
                 if(params.length > 0 && params[0] instanceof Integer){
                     int warranty = (Integer) params[0];
-                    //return new 
+                    return new ElectronicItem.ElectronicBuilder(productID, name).withPrice(price).withStock(stock).withWarranty(warranty).build();
+                } else {
+                    throw new IllegalArgumentException("ElectronicItem requires an int warranty (expressed in months).");
                 }
             default:
                 throw new AssertionError();

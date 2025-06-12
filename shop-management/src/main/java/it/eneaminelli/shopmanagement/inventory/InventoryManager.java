@@ -8,8 +8,13 @@ import it.eneaminelli.shopmanagement.item.ItemFactory;
 import it.eneaminelli.shopmanagement.strategies.ItemCreationStrategy;
 
 public class InventoryManager {
-    private ItemFactory itemFactory = new ItemFactory();
-    private Inventory inventory = new Inventory();
+    private final ItemFactory itemFactory;
+    private Inventory inventory;
+
+    public InventoryManager(Inventory inventory, ItemFactory itemFactory) {
+        this.inventory = inventory;
+        this.itemFactory = itemFactory;
+    }
 
     //Entry point for creating an item - new objects must implement strategy interface!
     public void createItem(ItemCreationStrategy strategy){
@@ -21,8 +26,13 @@ public class InventoryManager {
         //Delegating construction logic to strategies
 
         Item newItem = strategy.create();
-        System.out.println("Item created: " + newItem.toString());
-        inventory.addItem(newItem);
+
+        if(newItem != null) {
+            System.out.println("Item created: " + newItem.toString());
+            inventory.addItem(newItem);
+        } else {
+            System.err.println("Item creation failed: check the input.");
+        }
     }
 
     public Inventory getInventory() {

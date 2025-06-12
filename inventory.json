@@ -1,0 +1,34 @@
+[
+  {
+    "Type": "Perishable",
+    "expiryDate": "2025-11-14",
+    "name": "perishabletest",
+    "price": 4.0,
+    "productID": "pers",
+    "stock": 19
+  },
+  {
+    "Type": "Perishable",
+    "expiryDate": "2025-11-22",
+    "name": "test2",
+    "price": 2.0,
+    "productID": "testoerishableuitem",
+    "stock": 19
+  },
+  {
+    "Type": "Electronic",
+    "warranty": 36,
+    "name": "testelectropnic",
+    "price": 99.99,
+    "productID": "electronitest",
+    "stock": 10
+  },
+  {
+    "Type": "Electronic",
+    "warranty": 36,
+    "name": "testelectr",
+    "price": 99.0,
+    "productID": "testelectr",
+    "stock": 1
+  }
+]
