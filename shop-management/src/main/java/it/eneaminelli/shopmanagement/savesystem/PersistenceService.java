@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +24,9 @@ import it.eneaminelli.shopmanagement.item.itemsubclasses.PerishableItem;
 
 //handling of saving and loading functionalities
 public class PersistenceService {
+
+    private static final Logger logger = LoggerFactory.getLogger(PersistenceService.class);
+
     private final Gson gson;
     private static final Type ITEM_COLLECTION_TYPE = new TypeToken<Collection<Item>>() {}.getType();
 
@@ -57,7 +63,7 @@ public class PersistenceService {
             Path path = Paths.get(filePath);
             //check for file existance
             if(!Files.exists(path)){
-                System.err.println("Save file not found. Strting with a new empty inventory...");
+                logger.error("Save file not found. Strting with a new empty inventory...");
                 return new Inventory();
             }
 

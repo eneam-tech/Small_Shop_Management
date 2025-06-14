@@ -3,10 +3,15 @@ package it.eneaminelli.shopmanagement.item.itemsubclasses;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.eneaminelli.shopmanagement.item.Item;
 
 public class PerishableItem extends Item {
     
+    private static final Logger logger = LoggerFactory.getLogger(PerishableItem.class);
+
     private final LocalDate expiryDate;
 
     protected PerishableItem(PerishableBuilder builder) {

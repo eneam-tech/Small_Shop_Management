@@ -1,7 +1,5 @@
 package it.eneaminelli.shopmanagement.item;
 
-//TODO: Update item factory to support builder pattern and strategies.
-
 import java.time.LocalDate;
 
 import it.eneaminelli.shopmanagement.item.itemsubclasses.ElectronicItem;

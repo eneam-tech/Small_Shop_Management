@@ -8,9 +8,14 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.eneaminelli.shopmanagement.item.Item;
 
 public class Inventory {
+
+    private static final Logger logger = LoggerFactory.getLogger(Inventory.class);
 
     //TODO: convert from list (O(n) complexity) to map (o(1)) complexity
     private final Map<String, Item> inventoryMap;
@@ -27,13 +32,13 @@ public class Inventory {
 
     public void addItem(Item item){
         if(item == null || item.getProductID() == null){
-            System.err.println("Cannot add a null item or item without an ID");
+            logger.error("Cannot add a null item or item without an ID");
             return;
         } 
 
-        System.out.println("Adding/updating item with ID: " + item.getProductID());
+        logger.info("Adding/updating item with ID: " + item.getProductID());
         inventoryMap.put(item.getProductID(), item);
-        System.out.println("Operation successful");
+        logger.info("Operation successful");
     }
 
     public Item getItem(String productID){
@@ -44,9 +49,9 @@ public class Inventory {
     public void removeItem(String productID){
         Item removedItem = inventoryMap.remove(productID);
         if(removedItem != null){
-            System.out.println("Succesfully removed item " + removedItem.getName());
+            logger.info("Succesfully removed item " + removedItem.getName());
         } else {
-            System.out.println("No item found with ID: " + productID);
+            logger.info("No item found with ID: " + productID);
         }
     }
 

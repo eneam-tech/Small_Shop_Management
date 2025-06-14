@@ -1,6 +1,14 @@
 package it.eneaminelli.shopmanagement.item;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import it.eneaminelli.shopmanagement.item.itemsubclasses.ElectronicItem;
+
 public abstract class Item implements ItemInterface {
+
+    private static final Logger logger = LoggerFactory.getLogger(Item.class);
+
     private final String name;
     private final double price;
     private final String productID;

@@ -1,8 +1,14 @@
 package it.eneaminelli.shopmanagement.item.itemsubclasses;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.eneaminelli.shopmanagement.item.Item;
 
 public class ElectronicItem extends Item {
+
+    private static final Logger logger = LoggerFactory.getLogger(ElectronicItem.class);
+
     private final int warranty; //in months
 
     protected ElectronicItem(ElectronicBuilder builder){

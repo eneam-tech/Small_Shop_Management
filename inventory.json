@@ -24,6 +24,14 @@
     "stock": 10
   },
   {
+    "Type": "Perishable",
+    "expiryDate": "2025-10-10",
+    "name": "testperishable1406",
+    "price": 99.99,
+    "productID": "test14-06",
+    "stock": 1
+  },
+  {
     "Type": "Electronic",
     "warranty": 36,
     "name": "testelectr",
