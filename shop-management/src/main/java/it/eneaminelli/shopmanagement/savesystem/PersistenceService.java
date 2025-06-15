@@ -40,21 +40,6 @@ public class PersistenceService {
         this.gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(adapter).registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create(); //.setPrettyPrinting() makes the saved JSON file human-readable
     }
 
-
-    // public void save(Inventory inventory, String filePath) throws PersistenceException{
-    //     try {
-    //         //get data to save and convert collection to json
-    //         Collection<Item> itemsToSave = inventory.getAllItems();
-    //         String json = gson.toJson(itemsToSave, ITEM_COLLECTION_TYPE);
-    
-    //         //I/O to write string to file
-    //         Path path = Paths.get(filePath);
-    //         Files.writeString(path, json);
-    //     } catch (IOException e) {
-    //         throw new PersistenceException("Failed to save inventory to file: " + filePath, e);
-    //     }
-    // }
-
     /**
      * Saves the current state of the inventory to a JSON file.
      *
@@ -82,25 +67,6 @@ public class PersistenceService {
             throw new PersistenceServiceException("Could not save. Check for file permission or disk space", e);
         }
     }
-
-    // public Inventory load(String filePath) throws PersistenceException{
-    //     try {
-    //         Path path = Paths.get(filePath);
-    //         //check for file existance
-    //         if(!Files.exists(path)){
-    //             logger.error("Save file not found. Strting with a new empty inventory...");
-    //             return new Inventory();
-    //         }
-
-    //         String json = Files.readString(path);
-
-    //         Collection<Item> loadedItems = gson.fromJson(json, ITEM_COLLECTION_TYPE); //deserializes gson
-
-    //         return new Inventory(loadedItems);
-    //     } catch (Exception e) {
-    //         throw new PersistenceException("Failed to load a inventory from file: " + filePath, e);
-    //     }
-    // }
 
     public Inventory load(String filePath) throws PersistenceServiceException{
         logger.info("Loading file from: " + filePath);
