@@ -33,6 +33,14 @@
   },
   {
     "Type": "Electronic",
+    "warranty": 12,
+    "name": "12345teststest",
+    "price": 99.0,
+    "productID": "1234567788",
+    "stock": 10
+  },
+  {
+    "Type": "Electronic",
     "warranty": 36,
     "name": "testelectr",
     "price": 99.0,
