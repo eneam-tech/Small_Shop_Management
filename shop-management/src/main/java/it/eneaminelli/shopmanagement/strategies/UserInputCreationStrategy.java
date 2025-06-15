@@ -23,34 +23,34 @@ public class UserInputCreationStrategy implements ItemCreationStrategy {
     public Item create(){
         try{
             //---- type selection ----
-            logger.info("Select the item type from this list: ");
+            System.out.println("Select the item type from this list: ");
             for(ItemType type : ItemType.values()){
                 System.out.println(" - " + type.name());
             }
-            logger.info("Enter type: ");
+            System.out.println("Enter type: ");
             String typeInput = scanner.nextLine().toUpperCase();
             ItemType selectedType = ItemType.valueOf(typeInput); //convert string to enum for item selectionm
             
             //---other details selection ---
-            logger.info("Enter product ID: ");
+            System.out.println("Enter product ID: ");
             String id = scanner.nextLine();
-            logger.info("Enter name: ");
+            System.out.println("Enter name: ");
             String name = scanner.nextLine();
-            logger.info("Enter price: ");
+            System.out.println("Enter price: ");
             double price = scanner.nextDouble();
-            logger.info("Enter stock: ");
+            System.out.println("Enter stock: ");
             int stock = scanner.nextInt();
             scanner.nextLine(); //leave for lne consumption after int scan before!!
     
             switch (selectedType) {
                 case PERISHABLE:
-                    logger.info("Enter expiry date (YYYY-MM-DD):");
+                    System.out.println("Enter expiry date (YYYY-MM-DD):");
                     String dateInput = scanner.nextLine();
                     LocalDate expiryDate = LocalDate.parse(dateInput); //exception if format string is wrong
     
                     return new PerishableItem.PerishableBuilder(id, name).withPrice(price).withStock(stock).withExpiryDate(expiryDate).build();
                 case ELECTRONIC:
-                    logger.info("Enter warranty (months): ");
+                    System.out.println("Enter warranty (months): ");
                     int warranty = scanner.nextInt();
                     scanner.nextLine();
     
@@ -61,14 +61,18 @@ public class UserInputCreationStrategy implements ItemCreationStrategy {
             }
 
         } catch (InputMismatchException e) {
-            logger.error("Invalid input. Please enter number for price, stock and warranty.");
+            System.out.println("Invalid input. Please enter number for price, stock and warranty.");
+            logger.error("Invalid input for price, stock or warranty.", e);
+            // Clear the invalid input
             scanner.nextLine();
             return null;
         } catch (IllegalArgumentException e) {
-            logger.error("Invalid item type. Please enter one of listed types.");
+            System.out.println("Invalid item type. Please enter one of listed types.");
+            logger.error("Invalid item type selected: ", e);
             return null;
         } catch (DateTimeParseException e) {
-            logger.error("Invalid date format. Please use YYYY-MM-DD format.");
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+            logger.error("Invalid date format for expiry date: ", e);
             return null;
         }        
     }

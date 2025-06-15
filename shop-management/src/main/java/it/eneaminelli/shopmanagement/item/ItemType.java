@@ -17,7 +17,6 @@ public enum ItemType {
         return switch (this) {
             case PERISHABLE -> "Perishable";
             case ELECTRONIC -> "Electronic";
-            case DEFAULT_ITEM -> "default item";
             default -> "Error in type input.";
         };
     }

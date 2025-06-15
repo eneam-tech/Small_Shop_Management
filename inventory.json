@@ -1,50 +1,10 @@
 [
   {
     "Type": "Perishable",
-    "expiryDate": "2025-11-14",
-    "name": "perishabletest",
-    "price": 4.0,
-    "productID": "pers",
-    "stock": 19
-  },
-  {
-    "Type": "Perishable",
-    "expiryDate": "2025-11-22",
-    "name": "test2",
-    "price": 2.0,
-    "productID": "testoerishableuitem",
-    "stock": 19
-  },
-  {
-    "Type": "Electronic",
-    "warranty": 36,
-    "name": "testelectropnic",
-    "price": 99.99,
-    "productID": "electronitest",
-    "stock": 10
-  },
-  {
-    "Type": "Perishable",
-    "expiryDate": "2025-10-10",
-    "name": "testperishable1406",
-    "price": 99.99,
-    "productID": "test14-06",
-    "stock": 1
-  },
-  {
-    "Type": "Electronic",
-    "warranty": 12,
-    "name": "12345teststest",
-    "price": 99.0,
-    "productID": "1234567788",
-    "stock": 10
-  },
-  {
-    "Type": "Electronic",
-    "warranty": 36,
-    "name": "testelectr",
-    "price": 99.0,
-    "productID": "testelectr",
+    "expiryDate": "2025-12-30",
+    "name": "testPerishable1",
+    "price": 19.0,
+    "productID": "testPerishable1",
     "stock": 1
   }
 ]

@@ -34,10 +34,10 @@ public class InventoryManager {
         Item newItem = strategy.create();
 
         if(newItem != null) {
-            logger.info("Item created: " + newItem.toString());
+            System.out.println("Item created: " + newItem.toString());
             inventory.addItem(newItem);
         } else {
-            logger.error("Item creation failed: check the input.");
+            System.err.println("Item creation failed: check the input.");
         }
     }
 

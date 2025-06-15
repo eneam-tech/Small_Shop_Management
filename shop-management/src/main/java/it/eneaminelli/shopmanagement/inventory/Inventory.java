@@ -32,13 +32,14 @@ public class Inventory {
 
     public void addItem(Item item){
         if(item == null || item.getProductID() == null){
-            logger.error("Cannot add a null item or item without an ID");
+            System.out.println("Cannot add a null item or item without an ID");
+            logger.info("Tried to add a null item or item without an ID");
             return;
         } 
 
-        logger.info("Adding/updating item with ID: " + item.getProductID());
+        System.out.println("Adding/updating item with ID: " + item.getProductID());
         inventoryMap.put(item.getProductID(), item);
-        logger.info("Operation successful");
+        System.out.println("Operation successful");
     }
 
     public Item getItem(String productID){
@@ -49,9 +50,10 @@ public class Inventory {
     public void removeItem(String productID){
         Item removedItem = inventoryMap.remove(productID);
         if(removedItem != null){
-            logger.info("Succesfully removed item " + removedItem.getName());
+            System.out.println("Succesfully removed item " + removedItem.getName());
         } else {
-            logger.info("No item found with ID: " + productID);
+            System.out.println("No item found with ID: " + productID);
+            logger.info("Tried to remove item with ID: " + productID);
         }
     }
 
