@@ -1,10 +1,1 @@
-[
-  {
-    "Type": "Perishable",
-    "expiryDate": "2025-12-30",
-    "name": "testPerishable1",
-    "price": 19.0,
-    "productID": "testPerishable1",
-    "stock": 1
-  }
-]
+[]

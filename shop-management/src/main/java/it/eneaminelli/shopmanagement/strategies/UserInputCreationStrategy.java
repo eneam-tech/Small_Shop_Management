@@ -13,6 +13,7 @@ import it.eneaminelli.shopmanagement.item.ItemType;
 import it.eneaminelli.shopmanagement.item.itemsubclasses.ElectronicItem;
 import it.eneaminelli.shopmanagement.item.itemsubclasses.PerishableItem;
 //TODO: Add input sanitization!!!!!
+//TODO: make it accept scanner in construction for best practive
 public class UserInputCreationStrategy implements ItemCreationStrategy {
 
     private static final Logger logger = LoggerFactory.getLogger(UserInputCreationStrategy.class);
