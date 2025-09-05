@@ -1,1 +1,10 @@
-[]
+[   
+  {
+    "Type": "Electronic",
+    "warranty": 12,
+    "name": "test",
+    "price": 1.0,
+    "productID": "test",
+    "stock": 1
+  }
+]
